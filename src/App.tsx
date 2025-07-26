@@ -1,4 +1,6 @@
-import { createMatterWorld, makeGround } from '@/services/matter-module';
+import { makeBoxes } from '@/services/assets';
+import { makeGround } from '@/services/ground';
+import createMatterWorld from '@/services/create-matter';
 import { useEffect, useRef } from 'react';
 
 const App = () => {
@@ -12,6 +14,12 @@ const App = () => {
     makeGround({
       world: engine.world,
       container: containerRef.current,
+    });
+
+    makeBoxes({
+      world: engine.world,
+      container: containerRef.current,
+      count: 10,
     });
 
     return () => {
