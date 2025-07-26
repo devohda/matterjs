@@ -19,7 +19,7 @@ const App = () => {
     makeBoxes({
       world: engine.world,
       container: containerRef.current,
-      count: 10,
+      count: 20,
     });
 
     return () => {

@@ -1,5 +1,5 @@
 import { World, Bodies, Composite } from 'matter-js';
-import { getRandomInt } from '@/utils/random';
+import { getRandFloat, getRandomInt } from '@/utils/random';
 
 interface makeBoxesProps {
   world: World;
@@ -15,8 +15,13 @@ export const makeBoxes = ({ world, count, container }: makeBoxesProps) => {
     const x = getRandomInt(500, container.offsetWidth - 500);
     const y = getRandomInt(0, 10);
 
+    const friction = getRandFloat(0.005, 0.02);
+    const restitution = getRandFloat(1, 1.4);
+
     return Bodies.rectangle(x, y, width, height, {
       render: { visible: true },
+      friction,
+      restitution,
     });
   });
 
