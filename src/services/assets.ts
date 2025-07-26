@@ -1,4 +1,5 @@
 import { World, Bodies, Composite } from 'matter-js';
+import { getRandomInt } from '@/utils/random';
 
 interface makeBoxesProps {
   world: World;
@@ -6,9 +7,15 @@ interface makeBoxesProps {
   count: number;
 }
 
-export const makeBoxes = ({ world, container, count }: makeBoxesProps) => {
+export const makeBoxes = ({ world, count, container }: makeBoxesProps) => {
   const boxes = new Array(count).fill(null).map(() => {
-    return Bodies.rectangle(100, 100, 100, 100, {
+    const width = getRandomInt(100, 400);
+    const height = getRandomInt(100, 400);
+
+    const x = getRandomInt(500, container.offsetWidth - 500);
+    const y = getRandomInt(0, 10);
+
+    return Bodies.rectangle(x, y, width, height, {
       render: { visible: true },
     });
   });
