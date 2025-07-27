@@ -21,6 +21,16 @@ const createMatterWorld = (elem: HTMLDivElement) => {
   // run the renderer
   Render.run(render);
 
+  //
+  window.addEventListener('resize', () => {
+    const newWidth = elem.clientWidth;
+    const newHeight = elem.clientHeight;
+
+    // Update canvas element dimensions
+    render.canvas.width = newWidth;
+    render.canvas.height = newHeight;
+  });
+
   // create runner
   const runner = Runner.create();
 

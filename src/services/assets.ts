@@ -9,8 +9,8 @@ interface makeBoxesProps {
 
 export const makeBoxes = ({ world, count, container }: makeBoxesProps) => {
   const boxes = new Array(count).fill(null).map(() => {
-    const width = getRandomInt(200, 700);
-    const height = getRandomInt(200, 700);
+    const width = getRandomInt(50, 100);
+    const height = getRandomInt(200, 400);
 
     const x = getRandomInt(800, container.offsetWidth - 800);
     const y = getRandomInt(-800, -500);
