@@ -25,17 +25,17 @@ export const makeGround = ({ world, container }: makeGroundProps) => {
 
   const leftWall = Bodies.rectangle(
     0,
-    0,
+    -height,
     WALL_THICKNESS,
-    height * 2,
+    height * 4,
     WALL_OPTIONS,
   );
 
   const rightWall = Bodies.rectangle(
     width,
-    0,
+    -height,
     WALL_THICKNESS,
-    height * 2,
+    height * 4,
     WALL_OPTIONS,
   );
 

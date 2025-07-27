@@ -12,11 +12,11 @@ export const makeBoxes = ({ world, count, container }: makeBoxesProps) => {
     const width = getRandomInt(50, 100);
     const height = getRandomInt(200, 400);
 
-    const x = getRandomInt(800, container.offsetWidth - 800);
-    const y = getRandomInt(-800, -500);
+    const x = getRandomInt(20, container.offsetWidth - 20);
+    const y = getRandomInt(-400, -200);
 
-    const friction = getRandFloat(0.2, 0.3);
-    const restitution = getRandFloat(0.4, 0.5);
+    const friction = getRandFloat(0.1, 0.2);
+    const restitution = getRandFloat(0.6, 0.8);
     const angle = getRandFloat((0 * Math.PI) / 180, (90 * Math.PI) / 180);
 
     return Bodies.rectangle(x, y, width, height, {
