@@ -38,9 +38,7 @@ export const makeGround = ({ world, container }: makeGroundProps) => {
   Composite.add(world, [leftWall, rightWall, bottomWall]);
 
   return {
-    leftWall,
-    rightWall,
-    bottomWall,
+    ground: [leftWall, rightWall, bottomWall],
   };
 };
 

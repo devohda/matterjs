@@ -10,6 +10,7 @@ const App = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const intervalTimerRef = useRef<NodeJS.Timeout | null>(null);
   const timeoutTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const groundRef = useRef<Body[]>([]);
   const boxesRef = useRef<Body[]>([]);
 
   useEffect(() => {
@@ -17,7 +18,7 @@ const App = () => {
 
     const { clearWorld, engine } = createMatterWorld(containerRef.current);
 
-    makeGround({
+    const { ground } = makeGround({
       world: engine.world,
       container: containerRef.current,
     });
@@ -29,6 +30,7 @@ const App = () => {
       count: BOX_COUNT,
     });
 
+    groundRef.current = ground;
     boxesRef.current = boxes;
 
     // 3초 뒤에 box 제거하고 다시 20개의 box 추가 (반복)
@@ -37,20 +39,30 @@ const App = () => {
 
       if (!container) return;
 
-      // 3초 뒤에 box 제거
       if (timeoutTimerRef.current) {
         clearTimeout(timeoutTimerRef.current);
       }
 
-      World.remove(engine.world, boxesRef.current);
+      timeoutTimerRef.current = setTimeout(() => {
+        World.remove(engine.world, boxesRef.current);
 
-      const { boxes } = makeBoxes({
-        world: engine.world,
-        container,
-        count: BOX_COUNT,
-      });
+        const { ground } = makeGround({
+          world: engine.world,
+          container,
+        });
 
-      boxesRef.current = boxes;
+        groundRef.current = ground;
+
+        const { boxes } = makeBoxes({
+          world: engine.world,
+          container,
+          count: BOX_COUNT,
+        });
+
+        boxesRef.current = boxes;
+      }, 5000);
+
+      World.remove(engine.world, groundRef.current);
     }, 10000);
 
     intervalTimerRef.current = timer;
