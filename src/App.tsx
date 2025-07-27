@@ -2,9 +2,15 @@ import { makeBoxes } from '@/services/assets';
 import { makeGround } from '@/services/ground';
 import createMatterWorld from '@/services/create-matter';
 import { useEffect, useRef } from 'react';
+import { Body, World } from 'matter-js';
+
+const BOX_COUNT = 10;
 
 const App = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const intervalTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const boxesRef = useRef<Body[]>([]);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -16,13 +22,48 @@ const App = () => {
       container: containerRef.current,
     });
 
-    makeBoxes({
+    // 최초 한 번 box render
+    const { boxes } = makeBoxes({
       world: engine.world,
       container: containerRef.current,
-      count: 20,
+      count: BOX_COUNT,
     });
 
+    boxesRef.current = boxes;
+
+    // 3초 뒤에 box 제거하고 다시 20개의 box 추가 (반복)
+    const timer = setInterval(() => {
+      const container = containerRef.current;
+
+      if (!container) return;
+
+      // 3초 뒤에 box 제거
+      if (timeoutTimerRef.current) {
+        clearTimeout(timeoutTimerRef.current);
+      }
+
+      World.remove(engine.world, boxesRef.current);
+
+      const { boxes } = makeBoxes({
+        world: engine.world,
+        container,
+        count: BOX_COUNT,
+      });
+
+      boxesRef.current = boxes;
+    }, 10000);
+
+    intervalTimerRef.current = timer;
+
     return () => {
+      if (intervalTimerRef.current) {
+        clearInterval(intervalTimerRef.current);
+      }
+
+      if (timeoutTimerRef.current) {
+        clearTimeout(timeoutTimerRef.current);
+      }
+
       clearWorld();
     };
   }, []);

@@ -9,11 +9,11 @@ interface makeBoxesProps {
 
 export const makeBoxes = ({ world, count, container }: makeBoxesProps) => {
   const boxes = new Array(count).fill(null).map(() => {
-    const width = getRandomInt(100, 400);
-    const height = getRandomInt(100, 400);
+    const width = getRandomInt(300, 500);
+    const height = getRandomInt(300, 500);
 
-    const x = getRandomInt(500, container.offsetWidth - 500);
-    const y = getRandomInt(0, 10);
+    const x = getRandomInt(600, container.offsetWidth - 600);
+    const y = getRandomInt(-600, -300);
 
     const friction = getRandFloat(0.005, 0.02);
     const restitution = getRandFloat(1, 1.4);
@@ -26,4 +26,8 @@ export const makeBoxes = ({ world, count, container }: makeBoxesProps) => {
   });
 
   Composite.add(world, boxes);
+
+  return {
+    boxes,
+  };
 };
