@@ -2,7 +2,9 @@ import { Render, Runner, Engine } from 'matter-js';
 
 const createMatterWorld = (elem: HTMLDivElement) => {
   // create an engine
-  const engine = Engine.create();
+  const engine = Engine.create({
+    gravity: { y: 2 },
+  });
 
   // create a renderer
   const render = Render.create({

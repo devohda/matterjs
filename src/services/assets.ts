@@ -9,14 +9,14 @@ interface makeBoxesProps {
 
 export const makeBoxes = ({ world, count, container }: makeBoxesProps) => {
   const boxes = new Array(count).fill(null).map(() => {
-    const width = getRandomInt(300, 500);
-    const height = getRandomInt(300, 500);
+    const width = getRandomInt(500, 600);
+    const height = getRandomInt(500, 600);
 
-    const x = getRandomInt(600, container.offsetWidth - 600);
-    const y = getRandomInt(-600, -300);
+    const x = getRandomInt(800, container.offsetWidth - 800);
+    const y = getRandomInt(-800, -500);
 
     const friction = getRandFloat(0.005, 0.02);
-    const restitution = getRandFloat(1, 1.4);
+    const restitution = getRandFloat(0.7, 1);
 
     return Bodies.rectangle(x, y, width, height, {
       render: { visible: true },

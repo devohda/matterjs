@@ -1,9 +1,15 @@
+let seed = 0;
+
+const _seededRandom = () => {
+  // https://en.wikipedia.org/wiki/Linear_congruential_generator
+  seed = (seed * 9301 + 49297) % 233280;
+  return seed / 233280;
+};
+
 export const getRandomInt = (min: number, max: number) => {
-  const minCeil = Math.ceil(min);
-  const maxFloor = Math.floor(max);
-  return Math.floor(Math.random() * (maxFloor - minCeil + 1)) + minCeil;
+  return Math.floor(min + _seededRandom() * (max - min));
 };
 
 export const getRandFloat = (min: number, max: number) => {
-  return Math.floor(Math.random() * (min - max + 1)) + min;
+  return min + _seededRandom() * (max - min);
 };
