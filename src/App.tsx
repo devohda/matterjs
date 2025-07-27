@@ -89,7 +89,12 @@ const App = () => {
     <>
       <div
         ref={containerRef}
-        style={{ width: '100%', height: '100vh', backgroundColor: 'red' }}
+        style={{
+          width: '100%',
+          height: '100vh',
+          backgroundColor: '#00CFFF',
+          overflow: 'hidden',
+        }}
       />
       <div
         style={{
