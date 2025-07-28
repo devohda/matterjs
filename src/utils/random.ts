@@ -1,15 +1,24 @@
-let seed = 0;
+export class Random {
+  private seed = 0;
+  private _seededRandom = () => {
+    // https://en.wikipedia.org/wiki/Linear_congruential_generator
+    this.seed = (this.seed * 9301 + 49297) % 233280;
+    return this.seed / 233280;
+  };
 
-const _seededRandom = () => {
-  // https://en.wikipedia.org/wiki/Linear_congruential_generator
-  seed = (seed * 9301 + 49297) % 233280;
-  return seed / 233280;
-};
+  constructor() {
+    this.seed = this.setSeedRandom();
+  }
 
-export const getRandomInt = (min: number, max: number) => {
-  return Math.floor(min + _seededRandom() * (max - min));
-};
+  private setSeedRandom = () => {
+    return Math.random();
+  };
 
-export const getRandFloat = (min: number, max: number) => {
-  return min + _seededRandom() * (max - min);
-};
+  public getRandomInt = (min: number, max: number) => {
+    return Math.floor(min + this._seededRandom() * (max - min));
+  };
+
+  public getRandFloat = (min: number, max: number) => {
+    return min + this._seededRandom() * (max - min);
+  };
+}
