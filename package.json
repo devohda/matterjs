@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "matter-js": "^0.20.0",
+    "pathseg": "^1.2.1",
+    "poly-decomp-es": "^0.4.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
